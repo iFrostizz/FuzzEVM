@@ -1,0 +1,15 @@
+[package]
+name = "evm-fuzz"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ethabi = "18.0.0"
+ethers-abi = "18.0.0"
+ethers-solc = "2.0.10"
+revm = "3.5.0"
+serde_json = "1.0.107"
+tiny-keccak = "2.0.2"
+walkdir = "2.4.0"
