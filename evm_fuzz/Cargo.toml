@@ -1,0 +1,19 @@
+[package]
+name = "evm_fuzz"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bytes = "1.5.0"
+env_logger = "0.10.0"
+ethabi = "18.0.0"
+ethers-abi = "18.0.0"
+ethers-solc = "2.0.10"
+hex = "0.4.3"
+hex-literal = "0.4.1"
+log = "0.4.20"
+revm = "3.5.0"
+serde = "1.0.189"
+serde_json = "1.0.107"
+tiny-keccak = "2.0.2"
+walkdir = "2.4.0"

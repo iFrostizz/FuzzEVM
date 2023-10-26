@@ -8,14 +8,16 @@ edition = "2021"
 cargo-fuzz = true
 
 [dependencies]
+env_logger = "0.10.0"
+ethabi = "18.0.0"
 libfuzzer-sys = "0.4"
 
-[dependencies.evm-fuzz]
-path = ".."
+[dependencies.evm_fuzz]
+path = "../evm_fuzz/"
 
 # Prevent this from interfering with workspaces
-[workspace]
-members = ["."]
+# [workspace]
+# members = ["."]
 
 [profile.release]
 debug = 1
