@@ -4,10 +4,10 @@
 
 @external
 @pure
-def sig1(hash: bytes32, v: uint8, r:bytes32, s:bytes32) -> address:
+def sig1(hash: bytes32, v: uint8, r: bytes32, s: bytes32) -> address:
     return ecrecover(hash, v, r, s)
 
 @external
 @view
-def sig2(hash: bytes32, v: uint256, r:uint256, s:uint256) -> address:
+def sig2(hash: bytes32, v: uint8, r: bytes32, s: bytes32) -> address:
     return ecrecover(hash, v, r, s)

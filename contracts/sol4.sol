@@ -13,10 +13,10 @@ contract sol4 {
 
     function sig2(
         bytes32 hash,
-        uint256 v,
-        uint256 r,
-        uint256 s
+        uint8 v,
+        bytes32 r,
+        bytes32 s
     ) external pure returns (address) {
-        return ecrecover(hash, uint8(v), bytes32(r), bytes32(s));
+        return ecrecover(hash, v, r, s);
     }
 }

@@ -136,39 +136,48 @@ pub fn rand_seq(functions: Vec<Function>, data: &mut Vec<u8>) -> Vec<CallSeq> {
         func_len.pow(func_len as u32)
     };
 
-    let mut seqs = Vec::new();
+    // let mut seqs = Vec::new();
 
-    for i in 0..seq_len {
-        if data.is_empty() {
-            return seqs;
-        } else {
-            func_id = shuffle_byte(func_id);
-            let func = functions
-                .get((i * func_id as usize) % func_len)
-                .unwrap()
-                .clone();
-            // let value = U256::from_be_bytes::<32>(take_and_add(data, 8, 32).try_into().unwrap());
-            // let caller = Address::from_slice(&take_last(data, 20));
-            // let timestamp =
-            //     U256::from_be_bytes::<32>(take_and_add(data, 8, 32).try_into().unwrap());
-            let value = U256::ZERO;
-            let caller = Address::from_slice(&take_last(data, 20));
-            let timestamp =
-                U256::from_be_bytes::<32>(take_and_add(data, 8, 32).try_into().unwrap());
+    let func = &functions[func_id as usize % func_len];
+    vec![CallSeq {
+        func: func.clone(),
+        data: encode_func_args(func, data).into(),
+        caller: Address::from_slice(&take_last(data, 20)),
+        value: U256::ZERO,
+        timestamp: U256::from_be_bytes::<32>(take_and_add(data, 8, 32).try_into().unwrap()),
+    }]
 
-            let calldata: Bytes = encode_func_args(&func, data).into();
+    // for i in 0..seq_len {
+    //     if data.is_empty() {
+    //         return seqs;
+    //     } else {
+    //         func_id = shuffle_byte(func_id);
+    //         let func = functions
+    //             .get((i * func_id as usize) % func_len)
+    //             .unwrap()
+    //             .clone();
+    //         // let value = U256::from_be_bytes::<32>(take_and_add(data, 8, 32).try_into().unwrap());
+    //         // let caller = Address::from_slice(&take_last(data, 20));
+    //         // let timestamp =
+    //         //     U256::from_be_bytes::<32>(take_and_add(data, 8, 32).try_into().unwrap());
+    //         let value = U256::ZERO;
+    //         let caller = Address::from_slice(&take_last(data, 20));
+    //         let timestamp =
+    //             U256::from_be_bytes::<32>(take_and_add(data, 8, 32).try_into().unwrap());
 
-            seqs.push(CallSeq {
-                func,
-                data: calldata,
-                caller,
-                value,
-                timestamp,
-            });
-        }
-    }
+    //         let calldata: Bytes = encode_func_args(&func, data).into();
 
-    seqs
+    //         seqs.push(CallSeq {
+    //             func,
+    //             data: calldata,
+    //             caller,
+    //             value,
+    //             timestamp,
+    //         });
+    //     }
+    // }
+
+    // seqs
 }
 
 pub fn take_and_add(data: &mut Vec<u8>, take_size: usize, ret_size: usize) -> Vec<u8> {
